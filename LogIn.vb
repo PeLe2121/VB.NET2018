@@ -2,7 +2,7 @@
 Public Class LogIn
     'EDD several Public Property variables holding the attributes from the dataset
     Public Property username As String
-    Public Property passwrod As String
+        Public Property password As String
 
     'EDD: creates a list of LogIn objects for the user
     Public Shared Property LogInList As New List(Of LogIn)
