@@ -1,0 +1,30 @@
+Public Class ObjectCreator
+    Dim T20Data As New Database
+    Dim T20ConnectionString As String
+    Dim T20SQL As String
+    Dim T20DataSet As New DataSet
+    Dim tableName As String
+
+    '**************************************************************************************************************************
+    Public Sub CreateObjectsAndLists()
+        '
+        'RDB: Initialize the connection string to the database for this project
+        T20ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\IC4.mdb"
+        '
+        'RDB: Instantiate classes and set property values for the Seat
+        'RDB: First, we update data from the Seat table in the DataSet
+        tableName = "SeatTable"
+        T20SQL = "SELECT * FROM " & tableName
+        T20Data.RunSQL(tableName, T20SQL, T20DataSet, T20ConnectionString)
+        'RDB: Now, we transfer data from the Seat table in the DataSet to properties of the Objects in the Seat Class
+        For rowNumber As Integer = 0 To T20DataSet.Tables("SeatTable").Rows.Count - 1
+            Dim mySeat As New Seat
+            mySeat.FlightNumber = T20DataSet.Tables(tableName).Rows(rowNumber)("SeatCount")
+            mySeat.SeatRow = T20DataSet.Tables(tableName).Rows(rowNumber)("RowNumber")
+            mySeat.SeatPosition = T20DataSet.Tables(tableName).Rows(rowNumber)("SeatPosition")
+            mySeat.SeatNumber = T20DataSet.Tables(tableName).Rows(rowNumber)("SeatNumber")
+            Seat.SeatList.Add(mySeat)
+        Next
+    End Sub
+
+End Class
