@@ -14,14 +14,31 @@ Public Class ObjectCreator
         '
         'RDB: Instantiate classes and set property values for the Seat
         'RDB: First, we update data from the Seat table in the DataSet
-         tableName = "Log-In"
+        
+        'EDD: the table name and sql command is created based on the data set
+        tableName = "Discount_Condition"
+        T20SQL = "SELECT * FROM " & tableName
+        'EDD: the data is then run
+        T20Data.RunSQL(tableName, T20SQL, T20DataSet, T20ConnectionString)
+        'EDD: the data is now set in a discount condition object
+        For rowNumber As Integer = 0 To T20DataSet.Tables(tableName).Rows.Count - 1
+            Dim myDiscCond As New DiscountCondition
+            myDiscCond.name = T20DataSet.Tables(tableName).Rows(rowNumber)("Name")
+            myDiscCond.value = T20DataSet.Tables(tableName).Rows(rowNumber)("Value")
+            myDiscCond.unitOfMeasurement = T20DataSet.Tables(tableName).Rows(rowNumber)("U/M")
+            DiscountCondition.DiscCondList.Add(myDiscCond)
+        Next
+
+        'resets the table name and re-runs the SQL
+        tableName = "Log-In"
         T20SQL = "SELECT * FROM " & tableName
         T20Data.RunSQL(tableName, T20SQL, T20DataSet, T20ConnectionString)
-        'RDB: Now, we transfer data from the Seat table in the DataSet to properties of the Objects in the Seat Class
+        'EDD: the data from the LogIn table in the dataset is now being transfered to an Object from the LogIn class
+        'EDD: runs as many rows as there are in the dataset
         For rowNumber As Integer = 0 To T20DataSet.Tables(tableName).Rows.Count - 1
             Dim myLogIn As New LogIn
             myLogIn.username = T20DataSet.Tables(tableName).Rows(rowNumber)("Username")
-            myLogIn.passwrod = T20DataSet.Tables(tableName).Rows(rowNumber)("Password")
+            myLogIn.password = T20DataSet.Tables(tableName).Rows(rowNumber)("Password")
             LogIn.LogInList.Add(myLogIn)
         Next
     End Sub
