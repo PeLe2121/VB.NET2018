@@ -10,7 +10,7 @@ Public Class ObjectCreator
         '
         'PC: tests the Github collab
         'RDB: Initialize the connection string to the database for this project
-        T20ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\IC4.mdb"
+        T20ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\TP2 Group 20.mdb"
         '
         'RDB: Instantiate classes and set property values for the Seat
         'RDB: First, we update data from the Seat table in the DataSet
