@@ -6,7 +6,7 @@ Public Class Profit_Contribution
     Public Property unitOfMeasurement As String
 
     'PC: creates a list of Profit_Contribution objects for the user
-    'PC: ProfitCont is short for "discount condiditon"
+    'PC: ProfitCont is short for "profit contribution"
     Public Shared Property ProfitContList As New List(Of Profit_Contribution)
     Public Sub New()
             'PC: constrctor for the Profit_Contribution class
